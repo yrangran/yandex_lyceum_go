@@ -1,50 +1,4 @@
 package main 
-import (
-	"testing"
-	"errors"
-)
-
-
-var ErrInvalidUTF8 = errors.New("invalid utf8")
-
-func GetUTFLength(input []byte) (int, error) {
-if !utf8.Valid(input) {
-	return 0, ErrInvalidUTF8
-}
-
-return utf8.RuneCount(input), nil
-}
-
-
-
-func TestGetUTFLength(t *testing.T) {
-    // Тест на валидный UTF-8
-    validInput := []byte("Hello, 世界!")
-    length, err := GetUTFLength(validInput)
-    if err != nil {
-        t.Errorf("Expected no error, but got: %v", err)
-    }
-    if length != 10 {
-        t.Errorf("Expected length 11, but got: %d", length)
-    }
-
-    // Тест на невалидный UTF-8
-    invalidInput := []byte{0xFF} // Байт, который не является началом UTF-8 последовательности
-    _, err = GetUTFLength(invalidInput)
-    if err == nil || err.Error() != ErrInvalidUTF8.Error() {
-        t.Errorf("Expected error %q, but got: %v", ErrInvalidUTF8, err)
-    }
-
-    // Тест на пустой байтовый слайс
-    emptyInput := []byte{}
-    length, err = GetUTFLength(emptyInput)
-    if err != nil {
-        t.Errorf("Expected no error, but got: %v", err)
-    }
-    if length != 0 {
-        t.Errorf("Expected length 0, but got: %d", length)
-    }
-}
 
 
 
@@ -60,6 +14,76 @@ func TestGetUTFLength(t *testing.T) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+// import (
+// 	"testing"
+// 	"errors"
+// 	"unicode/utf8"
+// )
+// type Test_for_sum struct{
+// 	a int
+// 	b int
+// 	out int
+// }
+// var tests_sum = []Test_for_sum{
+// 	{1,2,3},
+// 	{4,5,9},
+// }
+
+// func TestSum(t *testing.T){
+// 	for i ,test:= range tests_sum{
+// 		result := Sum(test.a,test.b)
+// 		if result != test.out{
+// 			t.Errorf("%d: Result(%d+%d) = %d; want %d",i,test.a,test.b,result,test.out)
+// 		}
+// 	}
+// }
+
+// var ErrInvalidUTF8 = errors.New("invalid utf8")
+
+
+
+
+
+// func TestGetUTFLength(t *testing.T) {
+//     // Тест на валидный UTF-8
+//     validInput := []byte("Hello, 世界!")
+//     length, err := GetUTFLength(validInput)
+//     if err != nil {
+//         t.Errorf("Expected no error, but got: %v", err)
+//     }
+//     if length != 1 {
+//         t.Errorf("Expected length 11, but got: %d", length)
+//     }
+
+//     // Тест на невалидный UTF-8
+//     invalidInput := []byte{0xFF} // Байт, который не является началом UTF-8 последовательности
+//     _, err = GetUTFLength(invalidInput)
+//     if err == nil || err.Error() != ErrInvalidUTF8.Error() {
+//         t.Errorf("Expected error %q, but got: %v", ErrInvalidUTF8, err)
+//     }
+
+//     // Тест на пустой байтовый слайс
+//     emptyInput := []byte{}
+//     length, err = GetUTFLength(emptyInput)
+//     if err != nil {
+//         t.Errorf("Expected no error, but got: %v", err)
+//     }
+//     if length != 0 {
+//         t.Errorf("Expected length 0, but got: %d", length)
+//     }
+// }
 
 
 
